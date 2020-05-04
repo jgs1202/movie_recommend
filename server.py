@@ -11,6 +11,9 @@ from py.main import pick_up
 from py.recommend import Recommend
 from flask import jsonify, Flask, make_response
 from py.main import responce_draft
+import io,sys
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 
 app = Flask(__name__, template_folder='templates')
 CORS(app)
