@@ -75,3 +75,5 @@ sudo systemctl enable nginx
 sudo mkdir/var/log/uwsgi
 sudo chown -R vagrant /var/log/uwsgi
 
+sudo chown -R nginx:nginx  /nginx
+sudo chown -R vagrant:vagrant /nginx
