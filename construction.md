@@ -51,5 +51,22 @@ git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
 sudo pip3.6 install mecab-
 sudo yum install -y swig
 <!-- model.vecの送信が問題 情報オチ？-->
-cd ~/movie_recommend/
-python3.6 server.py
+
+sudo firewall-cmd --add-service=http --permanent
+sudo firewall-cmd --reload
+sudo mkdir /nginx
+cd ~
+sudo mv movie_reccomend/nginx.repo /nginx/nginx.repo
+
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum makecache fast
+sudo yum install -y docker-ce
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo usermod -aG docker $USER
+
+cd ~/movie_recommend
+sudo docker build -t centos-nginx:1.0 .
+sudo cp /nginx/nginx.repo /etc/yum.repos.d/nginx.repo
+
