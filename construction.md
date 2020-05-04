@@ -77,3 +77,7 @@ sudo chown -R vagrant /var/log/uwsgi
 
 sudo chown -R nginx:nginx  /nginx
 sudo chown -R vagrant:vagrant /nginx
+sudo chmod 777 /nginx
+
+sudo cd /var/
+git clone https://github.com/jgs1202/movie_recommend.git
