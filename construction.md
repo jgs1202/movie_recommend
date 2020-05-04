@@ -50,4 +50,6 @@ cd ~/source
 git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
 sudo pip3.6 install mecab-
 sudo yum install -y swig
-
+<!-- model.vecの送信が問題 情報オチ？-->
+cd ~/movie_recommend/
+python3.6 server.py
