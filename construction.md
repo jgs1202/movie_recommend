@@ -72,3 +72,6 @@ sudo cp /nginx/nginx.repo /etc/yum.repos.d/nginx.repo
 sudo yum -y install nginx
 sudo systemctl enable nginx
 
+sudo mkdir/var/log/uwsgi
+sudo chown -R vagrant /var/log/uwsgi
+
