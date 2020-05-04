@@ -16,14 +16,14 @@ app = Flask(__name__, template_folder='templates')
 CORS(app)
 
 
-@app.route("/")
+@app.route("/uwsgi")
 def hello_world():
     return "Hello, World!"
 
 
 session = Recommend()
 session.get_movie_data()
-@app.route("/data/<params>")
+@app.route("/uwsgi/data/<params>")
 def recommend_server(params=None):
     sentence = params.split('=')[1]
     movies = pick_up(session, sentence)
@@ -31,8 +31,9 @@ def recommend_server(params=None):
     return make_response(jsonify(movies))
 
 
-@app.route("/draft/<params>")
+@app.route("/uwsgi/draft/<params>")
 def draft_server(params=None):
+    print(params)
     params = params.split('&')
     sentence = [p.split('=')[1] for p in params]
     data = responce_draft(sentence[0], sentence[1], sentence[2])
@@ -42,5 +43,6 @@ def draft_server(params=None):
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(debug=False, host='0.0.0.0', port=port)
+    # app.run(debug=False, host='0.0.0.0', port=port)
+    app.run(debug=False, host='0.0.0.0')
     # app.run(debug=False, host='127.0.0.1', port=port)
