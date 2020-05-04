@@ -69,4 +69,6 @@ sudo usermod -aG docker $USER
 cd ~/movie_recommend
 sudo docker build -t centos-nginx:1.0 .
 sudo cp /nginx/nginx.repo /etc/yum.repos.d/nginx.repo
+sudo yum -y install nginx
+sudo systemctl enable nginx
 
