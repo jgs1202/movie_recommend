@@ -58,3 +58,5 @@ JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't fin
 1588403666718	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
 1588403669102	Marionette	INFO	Listening on port 61409
 1588403669196	Marionette	WARN	TLS certificate errors will be ignored for this session
+1588515681379	Marionette	INFO	Stopped listening on port 61409
+Exiting due to channel error.

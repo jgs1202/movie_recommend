@@ -24,3 +24,17 @@ class Movie_Data(db.Model):
 
     def __repr__(self):
         return "Movie<{}, {}, {}, {}, {}>".format(self.id, self.title, self.url, self.img_src, self.abstract)
+
+
+class introductions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    order = db.Column(db.Integer, unique=False)
+    sentence = db.Column(db.String(80), unique=False)
+
+    def __init__(self, order, sentence):
+        self.order = order
+        self.sentence = sentence
+        # self.choice2 = choice2
+
+    def __repr__(self):
+        return "Introduction<{}, {}, {}>".format(self.id, self.order, self.sentence)

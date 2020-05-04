@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import math
 import gensim
 import MeCab
 import numpy as np
@@ -14,12 +15,12 @@ from flaski.app import Movie_Data
 
 
 class Recommend:
-    def __init__(self, input_sentence):
-        self.input_sentence = input_sentence
+    def __init__(self):
+        self.input_sentence = ''
         self.movie_data = []
         self.similarities = []
         print('loading trained model...')
-        self.word2vec_model = gensim.models.KeyedVectors.load_word2vec_format('model.vec', binary=False)
+        self.word2vec_model = gensim.models.KeyedVectors.load_word2vec_format('./py/model.vec', binary=False)
         print('loaded')
         self.mecab = MeCab.Tagger("/usr/local/lib/mecab/dic/mecab-ipadic-neologd")
 
@@ -48,13 +49,14 @@ class Recommend:
         from sqlalchemy import create_engine, Column, String, Integer
         from sqlalchemy.ext.declarative import declarative_base
         from sqlalchemy.orm import sessionmaker
-        engine = create_engine('sqlite:///../flaski/amazon_prime_movies.db')
+        engine = create_engine('sqlite:///flaski/amazon_prime_movies.db')
         SessionMaker = sessionmaker(bind=engine)  # Pythonとデータベースの経路です
         session = SessionMaker()
         self.movie_data = session.query(Movie_Data).all()
 
-    def calc_similarity(self):
-        _similarities = [{"index":i, "value":0} for i in range(len(self.movie_data))]
+    def calc_similarity(self, sentence):
+        self.input_sentence = sentence
+        _similarities = [{"index": i, "value": 0.} for i in range(len(self.movie_data))]
 
         splited_input = self.input_sentence.split('。')
         for movie_num, movie_datum in enumerate(self.movie_data):
@@ -62,11 +64,19 @@ class Recommend:
             splited_target = movie_datum.abstract.split('。')
             for i in range(len(splited_input)):
                 try:
-                    _similarities_per_movie.append(self.mecab_similarity(splited_input[i], splited_target[i]))
+                    value = self.mecab_similarity(splited_input[i], splited_target[i])
+                    if math.isnan(value):
+                        _similarities_per_movie.append(0.)
+                    else:
+                        _similarities_per_movie.append(value)
                 except:
                     pass
-            _similarities[movie_num]['value'] = mean(_similarities_per_movie)
-        sorted(_similarities, key=itemgetter('value'), reverse=True)
+            if len(_similarities_per_movie) > 0:
+                _similarities[movie_num]['value'] = mean(_similarities_per_movie)
+            else:
+                _similarities[movie_num]['value'] = 0.
+
+        _similarities = sorted(_similarities, key=itemgetter('value'), reverse=True)
         self.similarities = _similarities[:10]
 
 
