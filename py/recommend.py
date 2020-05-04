@@ -20,7 +20,7 @@ class Recommend:
         self.movie_data = []
         self.similarities = []
         print('loading trained model...')
-        self.word2vec_model = gensim.models.KeyedVectors.load_word2vec_format('./py/model.vec', binary=False)
+        self.word2vec_model = gensim.models.KeyedVectors.load_word2vec_format('./py/model.vec')
         print('loaded')
         self.mecab = MeCab.Tagger("/usr/local/lib/mecab/dic/mecab-ipadic-neologd")
 
