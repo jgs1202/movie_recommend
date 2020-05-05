@@ -71,6 +71,7 @@ sudo usermod -aG docker $USER
 sudo cp /nginx/nginx.repo /etc/yum.repos.d/nginx.repo
 sudo yum -y install nginx
 sudo cp /var/movie_recommend/nginx.conf /etc/nginx/nginx.conf
+sudo cp /var/movie_recommend/log /var/log/uwsgi/log
 
 cd /var/movie_recommend
 <!-- sudo docker build -t centos-nginx:1.0 . -->
@@ -84,5 +85,6 @@ sudo chmod 777 /var/log/uwsgi
 
 sudo systemctl start nginx
 sudo systemctl restart nginx
+sudo cp -r /var/movie_recommend/vue/dist /nginx/dist
 cd /var/movie_recommend
 uwsgi myapp.ini
