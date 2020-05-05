@@ -100,7 +100,7 @@ export default {
       params.set('hero', that.hero)
       params.set('friend_a', that.friend_a)
       params.set('friend_b', that.friend_b)
-      const url = `http://192.168.10.114/uwsgi/draft/${params.toString()}`
+      const url = `http://asdfd/uwsgi/draft/${params.toString()}`
 
       $.ajax({
           url: url,
