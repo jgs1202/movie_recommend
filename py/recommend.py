@@ -81,13 +81,3 @@ class Recommend:
 
         _similarities = sorted(_similarities, key=itemgetter('value'), reverse=True)
         self.similarities = _similarities[:10]
-
-
-
-
-
-
-
-
-
-
