@@ -1,4 +1,4 @@
-sudo yum update
+sudo yum update -y
 sudo localectl set-locale LANG=en_US.UTF-8
 sudo yum install -y epel-release gcc libgcc tk-devel
 sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
@@ -16,8 +16,6 @@ sudo rpm -ivh http://packages.groonga.org/centos/groonga-release-1.1.0-1.noarch.
 sudo yum makecache
 sudo yum -y install mecab mecab-ipadic
 sudo yum -y install mecab-devel
-
--------------------確定------------------
 
 sudo yum install -y git
 sudo pip3.6 install uwsgi numpy
@@ -48,16 +46,20 @@ cd mecab-ipadic-2.7.0-20070801
 
 cd ~/source
 git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
-sudo pip3.6 install mecab-
+sudo pip3.6 install mecab-python3
 sudo yum install -y swig
 <!-- model.vecの送信が問題 情報オチ？-->
-
 sudo firewall-cmd --add-service=http --permanent
 sudo firewall-cmd --reload
 sudo mkdir /nginx
-cd ~
-sudo mv movie_reccomend/nginx.repo /nginx/nginx.repo
 
+sudo cd /var
+sudo git clone https://github.com/jgs1202/movie_recommend.git
+cd movie_recommend
+git checkout develop
+export PYTHONIOENCODING=utf-8
+
+sudo mv /var/movie_recommend/nginx.repo /nginx/nginx.repo
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum makecache fast
@@ -66,21 +68,21 @@ sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker $USER
 
-cd ~/movie_recommend
-sudo docker build -t centos-nginx:1.0 .
 sudo cp /nginx/nginx.repo /etc/yum.repos.d/nginx.repo
 sudo yum -y install nginx
-sudo systemctl enable nginx
+sudo cp /var/movie_recommend/nginx.conf /etc/nginx/nginx.conf
 
+cd /var/movie_recommend
+<!-- sudo docker build -t centos-nginx:1.0 . -->
+sudo systemctl enable nginx
 sudo mkdir/var/log/uwsgi
 sudo chown -R vagrant /var/log/uwsgi
-
 sudo chown -R nginx:nginx  /nginx
 sudo chown -R vagrant:vagrant /nginx
 sudo chmod 777 /nginx
+sudo chmod 777 /var/log/uwsgi
 
-sudo cd /var/
-git clone https://github.com/jgs1202/movie_recommend.git
-export PYTHONIOENCODING=utf-8
-cd movie_recommend
+sudo systemctl start nginx
+sudo systemctl restart nginx
+cd /var/movie_recommend
 uwsgi myapp.ini
