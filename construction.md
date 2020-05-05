@@ -81,3 +81,6 @@ sudo chmod 777 /nginx
 
 sudo cd /var/
 git clone https://github.com/jgs1202/movie_recommend.git
+export PYTHONIOENCODING=utf-8
+cd movie_recommend
+uwsgi myapp.ini

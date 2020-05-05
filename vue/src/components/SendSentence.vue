@@ -40,7 +40,7 @@ export default {
       that.loading = true
       const params = new URLSearchParams()
       params.set('sentence', this.sentence)
-      const url = `http://127.0.0.1:5000/data/${params.toString()}`
+      const url = `http://192.168.10.113/uwsgi/data/${params.toString()}`
 
       $.ajax({
           url: url,
