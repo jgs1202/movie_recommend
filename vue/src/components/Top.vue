@@ -1,6 +1,9 @@
 <template>
   <v-row class="text-center" justify='center'>
     <v-col cols=10>
+      <v-img src='http://drive.google.com/uc?export=view&id=1aYihPqyZrFiCA6-TlxVV1arqBch39-KX'></v-img>
+    </v-col>
+    <v-col cols=10>
       <div>あなたがてけとーに作成した文章に類似したAmazon Prime Videoの映画をてけとーにお勧めするよ！</div><br>
       <v-btn large color="primary" @click="transPage('Drafting')">診断開始！</v-btn>
     </v-col>
