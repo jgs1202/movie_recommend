@@ -5,8 +5,6 @@ from .draft import Draft
 
 def pick_up(session, sentence):
     session.calc_similarity(sentence)
-    for similarity in session.similarities:
-        print(similarity['value'])
     results = [session.movie_data[similarity['index']] for similarity in session.similarities]
     output = {"data": []}
     for result in results:
@@ -32,9 +30,9 @@ def responce_draft(hero, friend_a, friend_b):
 
 
 if __name__ == '__main__':
-    # sentence = '夏、海沿いの静かな町。幸せな夏休みを送るはずだった瑞穂の親友が殺された。瑞穂は密室の謎に叔父である弁護士とともに挑む。その犯人とは。'
-    # session = Recommend(sentence)
-    # session.get_movie_data()
-    # session.calc_similarity()
-    # result = [session.movie_data[similarity['index']] for similarity in session.similarities]
-    responce_draft('a', 'b', 'c')
+    sentence = '夏、海沿いの静かな町。幸せな夏休みを送るはずだった瑞穂の親友が殺された。瑞穂は密室の謎に叔父である弁護士とともに挑む。その犯人とは。'
+    session = Recommend()
+    session.get_movie_data()
+    session.calc_similarity(sentence)
+    result = [session.movie_data[similarity['index']] for similarity in session.similarities]
+    # responce_draft('a', 'b', 'c')

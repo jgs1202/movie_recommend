@@ -59,6 +59,9 @@ class Recommend:
         _similarities = [{"index": i, "value": 0.} for i in range(len(self.movie_data))]
 
         splited_input = self.input_sentence.split('。')
+        for i in range(len(splited_input)):
+            if len(splited_input[i]) == 0:
+                del splited_input[i]
         for movie_num, movie_datum in enumerate(self.movie_data):
             _similarities_per_movie = []
             splited_target = movie_datum.abstract.split('。')
@@ -71,7 +74,7 @@ class Recommend:
                         _similarities_per_movie.append(value)
                 except:
                     pass
-            if len(_similarities_per_movie) > 0:
+            if len(_similarities_per_movie) > 2:
                 _similarities[movie_num]['value'] = mean(_similarities_per_movie)
             else:
                 _similarities[movie_num]['value'] = 0.
