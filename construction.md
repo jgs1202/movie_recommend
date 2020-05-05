@@ -8,7 +8,7 @@ sudo yum install -y wget
 sudo yum install -y openssl-devel
 sudo yum install -y postgresql-devel
 sudo yum install -y sqlite-devel
-sudo yum install python36u python36u-libs python36u-devel python36u-pip.noarch
+sudo yum install -y python36u python36u-libs python36u-devel python36u-pip.noarch
 sudo ln -s /usr/bin/pip3.6 /usr/local/bin/pip
 sudo pip3.6 install --upgrade setuptools
 sudo pip3.6 install flask uwsgi flask_restful gensim flask_cors mecab-python3 scipy statistics flask_sqlalchemy
@@ -19,7 +19,7 @@ sudo yum -y install mecab-devel
 
 sudo yum install -y git
 sudo pip3.6 install uwsgi numpy
-sudo yum install -y gcc gcc-c++ make git openssl-devel　bzip2-devel zlib-devel readline-devel sqlite-devel patch
+sudo yum install -y gcc gcc-c++ make openssl-devel bzip2-devel zlib-devel readline-devel sqlite-devel patch
 sudo yum install -y blas-devel lapack-devel atlas-devel
 sudo pip3.6 install scipy matplotlib ipython pandas sympy nodes
 sudo pip3.6 install pydot sphinx
@@ -55,8 +55,8 @@ sudo mkdir /nginx
 
 sudo cd /var
 sudo git clone https://github.com/jgs1202/movie_recommend.git
-cd movie_recommend
-git checkout develop
+cd /var/movie_recommend
+sudo git checkout develop
 export PYTHONIOENCODING=utf-8
 
 sudo mv /var/movie_recommend/nginx.repo /nginx/nginx.repo
@@ -71,7 +71,8 @@ sudo usermod -aG docker $USER
 sudo cp /nginx/nginx.repo /etc/yum.repos.d/nginx.repo
 sudo yum -y install nginx
 sudo cp /var/movie_recommend/nginx.conf /etc/nginx/nginx.conf
-sudo cp /var/movie_recommend/log /var/log/uwsgi/log
+sudo mkdir /var/log/uwsgi
+sudo mv /var/movie_recommend/log /var/log/uwsgi/log
 
 cd /var/movie_recommend
 <!-- sudo docker build -t centos-nginx:1.0 . -->
@@ -88,3 +89,12 @@ sudo systemctl restart nginx
 sudo cp -r /var/movie_recommend/vue/dist /nginx/dist
 cd /var/movie_recommend
 uwsgi myapp.ini
+
+
+----------------ssl-------------------
+sudo mkdir /etc/nginx/ssl
+sudo openssl req -new -x509 -sha256 -newkey rsa:2048 -days 365 -nodes -out /etc/nginx/ssl/nginx.pem -keyout /etc/nginx/ssl/nginx.key
+sudo chown root:root -R /etc/nginx/ssl/
+sudo chmod 600 /etc/nginx/ssl/*
+sudo chmod 700 /etc/nginx/ssl
+-> nginx.confを編集
