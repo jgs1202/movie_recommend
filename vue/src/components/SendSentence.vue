@@ -1,10 +1,14 @@
 <template>
   <div id='SendSentence'>
-    <v-card>
-      <v-card-text>
-        {{sentence}}
-      </v-card-text>
-    </v-card>
+    <v-row class='text-center' justify='center'>
+      <v-col aligin='center' cols=9>
+        <v-card >
+          <v-card-text>
+            {{sentence}}
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
     <v-row class='text-center'>
       <v-col>
         <v-btn color='success' @click='sendData'

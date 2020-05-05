@@ -1,4 +1,4 @@
-# movie_recommend
+# てけとー画像診断
 
 ## Project setup
 ```
