@@ -1,4 +1,4 @@
-# vuetify-sample
+# てけとー画像診断
 
 ## Project setup
 ```
