@@ -72,7 +72,7 @@ class Recommend:
                 except:
                     pass
             if len(_similarities_per_movie) > 0:
-                _similarities[movie_num]['value'] = max(_similarities_per_movie)
+                _similarities[movie_num]['value'] = mean(_similarities_per_movie)
             else:
                 _similarities[movie_num]['value'] = 0.
 

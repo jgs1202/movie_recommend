@@ -5,6 +5,8 @@ from .draft import Draft
 
 def pick_up(session, sentence):
     session.calc_similarity(sentence)
+    for similarity in session.similarities:
+        print(similarity['value'])
     results = [session.movie_data[similarity['index']] for similarity in session.similarities]
     output = {"data": []}
     for result in results:
