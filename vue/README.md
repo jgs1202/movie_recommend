@@ -1,4 +1,4 @@
-# vuetify-sample
+# movie_recommend
 
 ## Project setup
 ```

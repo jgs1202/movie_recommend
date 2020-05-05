@@ -98,3 +98,12 @@ sudo chown root:root -R /etc/nginx/ssl/
 sudo chmod 600 /etc/nginx/ssl/*
 sudo chmod 700 /etc/nginx/ssl
 -> nginx.confを編集
+
+SELinuxを無効にする
+
+SELinuxの設定ファイルは /etc/selinux/config になるため、こちらを編集します。
+
+$ sudo vi /etc/selinux/config
+...
+SELINUX=disabled     ← enforcing から disabled に変更
+...
