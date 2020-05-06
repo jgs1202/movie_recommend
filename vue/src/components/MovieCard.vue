@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card v-if="isSmartPhone" class="mx-auto" @click='newTab(url)'>
+    <v-card v-if="isMobileDevice" class="mx-auto" @click='newTab(url)'>
       <v-img height='10rem' v-bind:src="imgSrc"></v-img>
         <v-card-title >{{title}}</v-card-title>
         <v-card-text class="text--primary">
@@ -32,12 +32,13 @@ export default {
   props: ['title', 'imgSrc', 'abstract', 'url'],
   data: function() {
     return {
-      isSmartPhone: false
+      isMobileDevice: false
     }
   },
   mounted: function() {
     let that = this
-    that.isSmartPhone = isMobile.phone
+    that.isMobileDevice = isMobile.any
+    // console.log(that.isSmartPhone)
     // console.log(that.title, that.imgSrc, that.abstract)
   },
   methods: {
