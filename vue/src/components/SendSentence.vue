@@ -1,6 +1,6 @@
 <template>
   <div id='SendSentence'>
-    <v-row v-if="isSmartphone" class='text-center' justify='center'>
+    <v-row v-if="isMobileDevice" class='text-center' justify='center'>
       <v-col aligin='center' cols=12>
         <v-card >
           <v-card-text>
@@ -41,12 +41,13 @@ export default {
     return {
       sentence: null,
       loading: false,
-      isSmartphone: isMobile.phone
+      isMobileDevice: false,
     }
   },
   mounted: function() {
     let that = this
-    console.log('send sentence')
+    console.log(isMobile().any)
+    that.isMobileDevice = isMobile().any
     that.sentence = that.$parent.$parent.$parent.completeSentence
   },
   methods: {
