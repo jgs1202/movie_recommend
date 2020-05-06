@@ -26,6 +26,7 @@ def hello_world():
 
 session = Recommend()
 session.get_movie_data()
+# print(pick_up(session, 'あいうえお'))
 @app.route("/uwsgi/data/<params>")
 def recommend_server(params=None):
     sentence = params.split('=')[1]
