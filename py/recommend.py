@@ -49,7 +49,7 @@ class Recommend:
         from sqlalchemy import create_engine, Column, String, Integer
         from sqlalchemy.ext.declarative import declarative_base
         from sqlalchemy.orm import sessionmaker
-        engine = create_engine('sqlite:///flaski/amazon_prime_movies.db')
+        engine = create_engine('sqlite:///flaski/all_amazon_prime_movies.db')
         SessionMaker = sessionmaker(bind=engine)  # Pythonとデータベースの経路です
         session = SessionMaker()
         self.movie_data = session.query(Movie_Data).all()
