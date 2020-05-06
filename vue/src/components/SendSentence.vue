@@ -1,6 +1,15 @@
 <template>
   <div id='SendSentence'>
-    <v-row class='text-center' justify='center'>
+    <v-row v-if="isSmartphone" class='text-center' justify='center'>
+      <v-col aligin='center' cols=12>
+        <v-card >
+          <v-card-text>
+            {{sentence}}
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row v-else class='text-center' justify='center'>
       <v-col aligin='center' cols=9>
         <v-card >
           <v-card-text>
@@ -24,6 +33,7 @@
 
 <script>
 // import axios from 'axios'
+import isMobile from 'ismobilejs'
 import $ from 'jquery'
 export default {
   name: 'SendSentence',
@@ -31,6 +41,7 @@ export default {
     return {
       sentence: null,
       loading: false,
+      isSmartphone: isMobile.phone
     }
   },
   mounted: function() {
