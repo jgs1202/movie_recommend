@@ -32,11 +32,12 @@ export default {
   props: ['title', 'imgSrc', 'abstract', 'url'],
   data: function() {
     return {
-      isSmartPHone: isMobile.phone
+      isSmartPhone: false
     }
   },
   mounted: function() {
-    // let that = this
+    let that = this
+    that.isSmartPhone = isMobile.phone
     // console.log(that.title, that.imgSrc, that.abstract)
   },
   methods: {
