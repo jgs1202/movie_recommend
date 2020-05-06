@@ -38,7 +38,8 @@ export default {
   mounted: function() {
     let that = this
     that.isMobileDevice = isMobile.any
-    // console.log(that.isSmartPhone)
+    that.isMobileDevice = true
+    console.log(isMobile.any)
     // console.log(that.title, that.imgSrc, that.abstract)
   },
   methods: {
