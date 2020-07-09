@@ -6,6 +6,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///amazon_prime_movies.db'
 db = SQLAlchemy(app)
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # db.init_app(app)
+# comment from codeanywhere
 
 
 class Movie_Data(db.Model):
